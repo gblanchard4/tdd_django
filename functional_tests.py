@@ -35,20 +35,25 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peackock feathers' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
 
         # There is another box inviting me to enter another item on a list
-        # I type "Tie a fly with peacock feathers"
-        self.fail('Finish the test!')
+        # I type "Use peacock feathers to make a fly"
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
 
         # The page updates again, now shows both items
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('2: Use peacock feathers to make a fly', [row.text for row in rows]
 
         # I wonder if the site would remember my list. I see it has generated a unique
         # URL for me with an explination
-
+        self.fail('Finish the test!')
         # I visit the URL and my list is still There
 
 if __name__ == '__main__':
