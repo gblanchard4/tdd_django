@@ -9,6 +9,15 @@ from lists.models import Item
 # Create your tests here.
 class HomePageTest(TestCase):
 
+    def test_home_page_displays_all_list_items(self):
+        Item.objects.create(text='itemy 1')
+        Item.objects.create(text='itemy 2')
+
+        request = HttpRequest()
+        response = home_page(request)
+
+        self.assertIn('itemy 1', response.content.decode())
+        self.assertIn('itemy 2', response.content.decode())
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
