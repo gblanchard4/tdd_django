@@ -51,7 +51,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row_in_list_table('1: Buy peacock feathers')
         self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
-        # A new user comes in, Francis
+        ## A new user comes in, Francis
 
         # With a new browser session to make sure no inforation is coming through
         self.browser.quit()
@@ -77,8 +77,3 @@ class NewVisitorTest(LiveServerTestCase):
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
-
-        # I wonder if the site would remember my list. I see it has generated a unique
-        # URL for me with an explination
-        self.fail('Finish the test!')
-        # I visit the URL and my list is still There
